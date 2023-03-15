@@ -1,0 +1,11 @@
+replicaCount: 1
+image:
+  repository: frankythway/testing
+  tag: v1
+  pullPolicy: Always
+service:
+  name: my-service
+  type: ClusterIP
+  port: 5000
+  targetPort: 5000
+

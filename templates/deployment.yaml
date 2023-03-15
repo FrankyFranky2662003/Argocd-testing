@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mychart.fullname" . }}
+  namespace: flask
+  labels:
+    app: flask
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector: 
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: frankythway/testing:v1
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["python", "py.py"]
+        ports:
+        - name: http
+          containerPort: 5000
+          protocol: TCP
